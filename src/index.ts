@@ -49,7 +49,7 @@ class Dlog {
           --END--
         `
       try {
-        await promises.writeFile(this._file, data, { flag: 'a+' })
+        await promises.appendFile(this._file, data, { flag: 'a+' })
         console.info(data)
       } catch (error) {
         console.error(error)
@@ -81,9 +81,9 @@ class Dlog {
       }
     }
 
-    resetAll () {
+    async resetAll () {
       try {
-        unlinkSync(this._file)
+        await promises.unlink(this._file)
       } catch (error) {
         if (!this.silenceDelete) {
           console.log(error)

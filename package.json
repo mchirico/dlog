@@ -1,6 +1,6 @@
 {
   "name": "@mchirico/dlog",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "private": false,
   "description": "A Debug Logger",
   "main": "lib/index.js",
