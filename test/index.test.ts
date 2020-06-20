@@ -2,7 +2,8 @@ import { Dlog } from '../src/index'
 
 describe('Dlog', () => {
   beforeEach(() => {
-
+    const dlog = new Dlog()
+    dlog.reset()
   })
 
   test('creates a simple log', async (done) => {

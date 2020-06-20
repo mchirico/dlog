@@ -43,6 +43,15 @@ class Dlog {
       return data.toString()
     }
 
+    reset () {
+      fs.unlinkSync(this._file)
+    }
+
+    resetAll () {
+      fs.unlinkSync(this._file)
+      fs.unlinkSync(this._statFile)
+    }
+
     private logStat (timeStamp: string, txt:string = 'default') {
       const data = `
         ${timeStamp.toString()}: ${this.count}
