@@ -1,11 +1,12 @@
 {
-  "name": "dlog",
-  "version": "1.0.0",
-  "private": true,
+  "name": "@mchirico/dlog",
+  "version": "1.0.1",
+  "private": false,
   "description": "A Debug Logger",
   "author": "Mike Chirico (https://mchirico.github.io/) <mchirico@gmail.com>",
   "license": "ISC",
   "repository": "https://github.com/mchirico/dlog.git",
+  "publishConfig": { "registry": "https://npm.pkg.github.com/mchirico" },
   "homepage": "https://github.com/mchirico/dlog",
   "bugs": "https://github.com/mchirico/dlog/issues",
   "keywords": [
