@@ -1,15 +1,15 @@
-// import fs from 'fs'
+
 import { promises, unlinkSync } from 'fs'
 
 class Dlog {
-    silence:boolean
+    silenceDelete:boolean
     _file: string
     _statFile: string
     count:number = 0
-    constructor (file:string = './dlogger.txt', statFile:string = './dloggerStats.txt', silence = true) {
+    constructor (file:string = './dlogger.txt', statFile:string = './dloggerStats.txt', silenceDelete = true) {
       this._file = file
       this._statFile = statFile
-      this.silence = silence
+      this.silenceDelete = silenceDelete
     }
 
     set file (file:string) {
@@ -29,12 +29,10 @@ class Dlog {
 
       try {
         await promises.writeFile(this._file, data)
-        console.info('File created successfully with Node.js v13 fs.promises!')
+        console.info(data)
       } catch (error) {
         console.error(error)
       }
-
-      // fs.writeFileSync(this._file, data, { flag: 'w+' })
     }
 
     async append (txt: string) {
@@ -48,11 +46,10 @@ class Dlog {
         `
       try {
         await promises.writeFile(this._file, data, { flag: 'a+' })
-        console.info('File created successfully with Node.js v13 fs.promises!')
+        console.info(data)
       } catch (error) {
         console.error(error)
       }
-      // fs.writeFileSync(this._file, data, { flag: 'a+' })
     }
 
     async read () {
@@ -81,7 +78,7 @@ class Dlog {
       try {
         unlinkSync(this._file)
       } catch (error) {
-        if (!this.silence) {
+        if (!this.silenceDelete) {
           console.log(error)
         }
       }
@@ -91,7 +88,7 @@ class Dlog {
       try {
         unlinkSync(this._file)
       } catch (error) {
-        if (!this.silence) {
+        if (!this.silenceDelete) {
           console.log(error)
         }
       }
@@ -99,7 +96,7 @@ class Dlog {
       try {
         unlinkSync(this._statFile)
       } catch (error) {
-        if (!this.silence) {
+        if (!this.silenceDelete) {
           console.log(error)
         }
       }
