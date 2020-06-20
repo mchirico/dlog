@@ -1,15 +1,19 @@
 
 import { promises, unlinkSync } from 'fs'
+import { Stat } from './statfile'
 
 class Dlog {
     silenceDelete:boolean
     _file: string
     _statFile: string
     count:number = 0
-    constructor (file:string = './dlogger.txt', statFile:string = './dloggerStats.txt', silenceDelete = true) {
+    stat: Stat
+    constructor (file:string = './dlogger.txt', statFile:string = './dloggerStats.txt',
+      silenceDelete = true) {
       this._file = file
       this._statFile = statFile
       this.silenceDelete = silenceDelete
+      this.stat = new Stat(statFile)
     }
 
     set file (file:string) {
@@ -18,7 +22,7 @@ class Dlog {
 
     async log (txt: string) {
       const timeStamp = Date()
-      this.logStat(timeStamp, `log: {length: ${txt.length}}`)
+      this.stat.logStat(timeStamp, `log: {length: ${txt.length}}`)
 
       const data = `
         ${timeStamp.toString()}
@@ -37,7 +41,7 @@ class Dlog {
 
     async append (txt: string) {
       const timeStamp = Date()
-      await this.logStat(timeStamp, `append: {length: ${txt.length}}`)
+      await this.stat.logStat(timeStamp, `append: {length: ${txt.length}}`)
       const data = `
         ${timeStamp.toString()}
           --START--
@@ -54,7 +58,7 @@ class Dlog {
 
     async read () {
       const timeStamp = Date()
-      await this.logStat(timeStamp, 'read')
+      await this.stat.logStat(timeStamp, 'read')
       try {
         const data = await promises.readFile(this._file)
         return data.toString()
@@ -64,14 +68,7 @@ class Dlog {
     }
 
     async readStat () {
-      const timeStamp = Date()
-      await this.logStat(timeStamp, 'read')
-      try {
-        const data = await promises.readFile(this._statFile)
-        return data.toString()
-      } catch (error) {
-        return error
-      }
+      return this.stat.readStat()
     }
 
     reset () {
@@ -93,28 +90,7 @@ class Dlog {
         }
       }
 
-      try {
-        unlinkSync(this._statFile)
-      } catch (error) {
-        if (!this.silenceDelete) {
-          console.log(error)
-        }
-      }
-    }
-
-    private async logStat (timeStamp: string, txt: string = 'default') {
-      const data = `
-        ${timeStamp.toString()}: ${this.count}
-          ---
-               ${txt}
-          ---
-        `
-      try {
-        await promises.writeFile(this._statFile, data, { flag: 'a+' })
-        console.info('File created successfully with Node.js v13 fs.promises!')
-      } catch (error) {
-        console.error(error)
-      }
+      this.stat.reset()
     }
 }
 
