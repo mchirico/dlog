@@ -2,7 +2,7 @@
 [![codecov](https://codecov.io/gh/mchirico/dlog/branch/master/graph/badge.svg)](https://codecov.io/gh/mchirico/dlog)
 # dlog
 
-## Usage
+A simple async debug logging module.
 
 ### Install
 
