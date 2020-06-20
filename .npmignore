@@ -1,0 +1,7 @@
+Dockerfile
+Makefile
+dlogger*
+env*
+*.pem
+coverage*
+coverage/**/
