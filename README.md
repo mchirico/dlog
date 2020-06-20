@@ -2,3 +2,25 @@
 [![codecov](https://codecov.io/gh/mchirico/dlog/branch/master/graph/badge.svg)](https://codecov.io/gh/mchirico/dlog)
 # dlog
 
+## Usage
+
+### Install
+
+```js
+
+npm install @mchirico/dlog
+
+```
+
+Now use it in your code.
+
+```js
+import {Dlog} from '@mchirico/dlog'
+
+const l = new Dlog()
+l.log('something to log')
+
+
+```
+
+

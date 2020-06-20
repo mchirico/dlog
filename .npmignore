@@ -5,3 +5,8 @@ env*
 *.pem
 coverage*
 coverage/**/
+src
+tsconfig.json
+tslint.json
+.prettierrc
+*.md

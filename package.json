@@ -1,12 +1,16 @@
 {
   "name": "@mchirico/dlog",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "private": false,
   "description": "A Debug Logger",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "author": "Mike Chirico (https://mchirico.github.io/) <mchirico@gmail.com>",
   "license": "ISC",
   "repository": "https://github.com/mchirico/dlog.git",
-  "publishConfig": { "registry": "https://npm.pkg.github.com/mchirico" },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/mchirico"
+  },
   "homepage": "https://github.com/mchirico/dlog",
   "bugs": "https://github.com/mchirico/dlog/issues",
   "keywords": [
@@ -20,7 +24,8 @@
     "start": "probot run ./lib/index.js",
     "lint": "standard **/*.ts --fix",
     "test": "jest --coverage && standard **/*.ts",
-    "test:watch": "jest --watch --notify --notifyMode=change --coverage"
+    "test:watch": "jest --watch --notify --notifyMode=change --coverage",
+    "pub": "npm publish --access public"
   },
   "dependencies": {
     "@types/lodash": "^4.14.155",
@@ -39,6 +44,9 @@
     "ts-jest": "^25.1.0",
     "typescript": "^3.6.4"
   },
+  "files": [
+     "lib/**/*"
+  ],
   "engines": {
     "node": ">= 8.3.0"
   },
