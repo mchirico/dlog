@@ -22,7 +22,7 @@ class Dlog {
 
     async write (txt: string) {
       const file = `./junk_${Math.random() * 1000}`
-      await promises.writeFile(file, txt)
+      await promises.appendFile(file, txt)
       return file
     }
 
