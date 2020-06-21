@@ -62,16 +62,13 @@ class Dlog {
     }
 
     async reset () {
-      try {
-        await promises.unlink(this._file)
-      } catch (error) {
-        if (!this.silenceDelete) {
-          console.log(error)
-        }
+      await promises.unlink(this._file).catch(error => {
+        if (!this.silenceDelete) console.log(error.message)
       }
+      )
     }
 
-    resetAll () {
+    async resetAll () {
       promises.unlink(this._file).catch(error => {
         console.log(error.message)
       }
