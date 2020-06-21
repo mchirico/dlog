@@ -18,9 +18,9 @@ Now use it in your code.
 import {Dlog} from '@mchirico/dlog'
 
 const l = new Dlog()
-await l.log('something to log')
+await l.logonce('something to log')
 
-await l.append('more data')
+await l.log('more data')
 
 # remove logs
 await l.resetAll()
@@ -33,10 +33,10 @@ and reads.. see the test where await can help.
 ```js
 test('creates a simple log append', async (done) => {
     const dlog = new Dlog()
-    await dlog.append('test Message1')
+    await dlog.log('test Message1')
     const results = await dlog.read()
 
-    await dlog.append('test Message2')
+    await dlog.log('test Message2')
     const results2 = await dlog.read()
 
     expect(results).toContain('test Message1')
