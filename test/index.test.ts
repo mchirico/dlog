@@ -7,9 +7,19 @@ describe('Dlog', () => {
     dlog.resetAll()
   })
 
+  test('testing idea', async (done) => {
+    const dlog = new Dlog()
+    const file = await dlog.write('test Message')
+    const result = await dlog.readf(file)
+    await dlog.rm(file)
+    // const results = await dlog.read()
+    // done()
+    done(expect(result).toContain('test Message'))
+  })
+
   test('creates a simple log write', async (done) => {
     const dlog = new Dlog()
-    dlog.log('test Message')
+    await dlog.log('test Message')
     const results = await dlog.read()
 
     done(expect(results).toContain('test Message'))
@@ -48,7 +58,7 @@ describe('Dlog', () => {
 
   test('test reset', async (done) => {
     const dlog = new Dlog()
-    dlog.log('test Message')
+    await dlog.log('test Message')
     const results = await dlog.read()
 
     expect(results).toContain('test Message')
@@ -61,7 +71,7 @@ describe('Dlog', () => {
       expect(error.toString()).toContain('no such file or directory, open')
     }
 
-    dlog.log('test 2 taco')
+    await dlog.log('test 2 taco')
     const results2 = await dlog.read()
 
     done(expect(results2).toContain('test 2 taco'))
