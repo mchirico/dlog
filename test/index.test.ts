@@ -4,7 +4,7 @@ import { Stat } from '../src/statfile'
 describe('Dlog', () => {
   beforeEach(async () => {
     const dlog = new Dlog()
-    await dlog.resetAll()
+    dlog.resetAll()
   })
 
   test('creates a simple log write', async (done) => {
