@@ -18,8 +18,12 @@ Now use it in your code.
 import {Dlog} from '@mchirico/dlog'
 
 const l = new Dlog()
-l.log('something to log')
+await l.log('something to log')
 
+await l.append('more data')
+
+# remove logs
+await l.resetAll()
 
 ```
 

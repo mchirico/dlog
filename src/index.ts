@@ -20,9 +20,25 @@ class Dlog {
       this._file = file
     }
 
+    async write (txt: string) {
+      const file = `./junk_${Math.random() * 1000}`
+      await promises.appendFile(file, txt)
+      return file
+    }
+
+    async readf (file: string) {
+      const result = await promises.readFile(file)
+      console.log(result.toString())
+      return result.toString()
+    }
+
+    async rm (file: string) {
+      return await promises.unlink(file)
+    }
+
     async log (txt: string) {
       const timeStamp = Date()
-      this.stat.logStat(timeStamp, `log: {length: ${txt.length}}`)
+      await this.stat.logStat(timeStamp, `log: {length: ${txt.length}}`)
 
       const data = `
         ${timeStamp.toString()}
@@ -62,25 +78,19 @@ class Dlog {
     }
 
     async reset () {
-      try {
-        await promises.unlink(this._file)
-      } catch (error) {
-        if (!this.silenceDelete) {
-          console.log(error)
-        }
-      }
+      await promises.unlink(this._file).catch(error => {
+        if (!this.silenceDelete) console.log(error.message)
+      })
     }
 
     async resetAll () {
-      try {
-        await promises.unlink(this._file)
-      } catch (error) {
-        if (!this.silenceDelete) {
-          console.log(error)
-        }
-      }
-
-      await this.stat.reset()
+      promises.unlink(this._file).catch(error => {
+        if (!this.silenceDelete) console.log(error.message)
+      })
+      this.stat.reset().catch(
+        error => {
+          if (!this.silenceDelete) console.log(error.message)
+        })
     }
 }
 
