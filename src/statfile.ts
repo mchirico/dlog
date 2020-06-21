@@ -16,12 +16,9 @@ class Stat {
     async readStat () {
       const timeStamp = Date()
       await this.logStat(timeStamp, 'read')
-      try {
-        const data = await promises.readFile(this._statFile)
-        return data.toString()
-      } catch (error) {
-        return error
-      }
+
+      const data = await promises.readFile(this._statFile)
+      return data.toString()
     }
 
     async reset () {
@@ -41,11 +38,8 @@ class Stat {
                ${txt}
           ---
         `
-      try {
-        await promises.writeFile(this._statFile, data, { flag: 'a+' })
-      } catch (error) {
-        console.error(error)
-      }
+
+      await promises.writeFile(this._statFile, data, { flag: 'a+' })
     }
 }
 

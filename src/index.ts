@@ -31,12 +31,8 @@ class Dlog {
           --END--
         `
 
-      try {
-        await promises.writeFile(this._file, data)
-        console.info(data)
-      } catch (error) {
-        console.error(error)
-      }
+      await promises.writeFile(this._file, data)
+      console.info(data)
     }
 
     async append (txt: string) {
@@ -48,23 +44,17 @@ class Dlog {
         ${txt}
           --END--
         `
-      try {
-        await promises.appendFile(this._file, data, { flag: 'a+' })
-        console.info(data)
-      } catch (error) {
-        console.error(error)
-      }
+
+      await promises.appendFile(this._file, data, { flag: 'a+' })
+      console.info(data)
     }
 
     async read () {
       const timeStamp = Date()
       await this.stat.logStat(timeStamp, 'read')
-      try {
-        const data = await promises.readFile(this._file)
-        return data.toString()
-      } catch (error) {
-        return error
-      }
+
+      const data = await promises.readFile(this._file)
+      return data.toString()
     }
 
     async readStat () {
@@ -90,7 +80,7 @@ class Dlog {
         }
       }
 
-      this.stat.reset()
+      await this.stat.reset()
     }
 }
 
