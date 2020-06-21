@@ -20,25 +20,9 @@ class Dlog {
       this._file = file
     }
 
-    async write (txt: string) {
-      const file = `./junk_${Math.random() * 1000}`
-      await promises.appendFile(file, txt)
-      return file
-    }
-
-    async readf (file: string) {
-      const result = await promises.readFile(file)
-      console.log(result.toString())
-      return result.toString()
-    }
-
-    async rm (file: string) {
-      return await promises.unlink(file)
-    }
-
-    async log (txt: string) {
+    async logonce (txt: string) {
       const timeStamp = Date()
-      await this.stat.logStat(timeStamp, `log: {length: ${txt.length}}`)
+      await this.stat.logStat(timeStamp, `logonce: {length: ${txt.length}}`)
 
       const data = `
         ${timeStamp.toString()}
@@ -51,7 +35,7 @@ class Dlog {
       console.info(data)
     }
 
-    async append (txt: string) {
+    async log (txt: string) {
       const timeStamp = Date()
       await this.stat.logStat(timeStamp, `append: {length: ${txt.length}}`)
       const data = `
@@ -74,10 +58,14 @@ class Dlog {
     }
 
     async readStat () {
+      const timeStamp = Date()
+      await this.stat.logStat(timeStamp, 'readStat')
       return await this.stat.readStat()
     }
 
     async reset () {
+      const timeStamp = Date()
+      await this.stat.logStat(timeStamp, 'reset')
       await promises.unlink(this._file).catch(error => {
         if (!this.silenceDelete) console.log(error.message)
       })
