@@ -46,6 +46,27 @@ describe('Dlog', () => {
     done(expect(results).toContain('read'))
   })
 
+  test('test reset', async (done) => {
+    const dlog = new Dlog()
+    dlog.log('test Message')
+    const results = await dlog.read()
+
+    expect(results).toContain('test Message')
+    await dlog.reset()
+
+    try {
+      const r = await dlog.read()
+      expect(r).toContain('no such file or directory, open')
+    } catch (error) {
+      expect(error.toString()).toContain('no such file or directory, open')
+    }
+
+    dlog.log('test 2 taco')
+    const results2 = await dlog.read()
+
+    done(expect(results2).toContain('test 2 taco'))
+  })
+
   afterEach(() => {
 
   })

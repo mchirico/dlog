@@ -1,5 +1,5 @@
 
-import { promises, unlinkSync } from 'fs'
+import { promises } from 'fs'
 import { Stat } from './statfile'
 
 class Dlog {
@@ -68,12 +68,12 @@ class Dlog {
     }
 
     async readStat () {
-      return this.stat.readStat()
+      return await this.stat.readStat()
     }
 
-    reset () {
+    async reset () {
       try {
-        unlinkSync(this._file)
+        await promises.unlink(this._file)
       } catch (error) {
         if (!this.silenceDelete) {
           console.log(error)

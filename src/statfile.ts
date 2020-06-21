@@ -1,4 +1,4 @@
-import { promises, unlinkSync } from 'fs'
+import { promises } from 'fs'
 
 class Stat {
     silenceDelete:boolean
@@ -24,9 +24,9 @@ class Stat {
       }
     }
 
-    reset () {
+    async reset () {
       try {
-        unlinkSync(this._statFile)
+        await promises.unlink(this._statFile)
       } catch (error) {
         if (!this.silenceDelete) {
           console.log(error)
