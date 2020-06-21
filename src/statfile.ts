@@ -22,13 +22,10 @@ class Stat {
     }
 
     async reset () {
-      try {
-        await promises.unlink(this._statFile)
-      } catch (error) {
-        if (!this.silenceDelete) {
-          console.log(error)
-        }
-      }
+      await promises.unlink(this._statFile).catch(
+        error => {
+          if (!this.silenceDelete) console.log(error.message)
+        })
     }
 
     async logStat (timeStamp: string, txt: string = 'default') {
@@ -39,7 +36,7 @@ class Stat {
           ---
         `
 
-      await promises.writeFile(this._statFile, data, { flag: 'a+' })
+      await promises.appendFile(this._statFile, data)
     }
 }
 
