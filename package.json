@@ -1,6 +1,6 @@
 {
   "name": "@mchirico/dlog",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "private": false,
   "description": "A Debug Logger",
   "main": "lib/index.js",
@@ -9,7 +9,7 @@
   "license": "Apache-2.0",
   "repository": "https://github.com/mchirico/dlog.git",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/mchirico"
+    "registry": "https://registry.npmjs.org/"
   },
   "homepage": "https://github.com/mchirico/dlog",
   "bugs": "https://github.com/mchirico/dlog/issues",
